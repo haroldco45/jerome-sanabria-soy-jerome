@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="description" content="Jerome Sanabria — Mi Generación. Podcast, columnas, activismo pensional y más." />
+  <meta property="og:title" content="Jerome Sanabria — SoyJerome" />
+  <meta property="og:description" content="Podcast Mi Generación · Vocera #NoConMiAhorro · Columnista La República" />
+  <title>Jerome Sanabria — SoyJerome</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --card: #161616;
+      --border: #222222;
+      --accent: #E8FF00;
+      --accent2: #FF3B3B;
+      --accent3: #00C9FF;
+      --text: #F5F5F0;
+      --muted: #888;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 20px 40px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(232,255,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232,255,0,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .hero-bg-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,255,0,0.12) 0%, transparent 70%);
+      top: -200px;
+      right: -200px;
+      animation: pulse 6s ease-in-out infinite alternate;
+    }
+
+    .hero-bg-glow2 {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,59,59,0.08) 0%, transparent 70%);
+      bottom: 0;
+      left: -100px;
+      animation: pulse 8s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); opacity: 0.8; }
+      to { transform: scale(1.2); opacity: 1; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 480px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 5px 12px;
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: blink 1.2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(72px, 22vw, 130px);
+      line-height: 0.85;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero-name span {
+      color: var(--accent);
+      display: block;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: 20px;
+      line-height: 1.6;
+      max-width: 340px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-tagline strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 32px;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 32px;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 1;
+      animation: fadeIn 1s 1s ease both;
+    }
+
+    .scroll-hint span {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      writing-mode: vertical-rl;
+    }
+
+    .scroll-hint-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--muted), transparent);
+      animation: scrollDown 1.5s ease-in-out infinite;
+    }
+
+    @keyframes scrollDown {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ─── NAV BOTTOM ─── */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(480px, 100%);
+      background: rgba(17,17,17,0.95);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0 max(12px, env(safe-area-inset-bottom));
+      z-index: 100;
+    }
+
+    .nav-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      padding: 4px 12px;
+      transition: color 0.2s;
+    }
+
+    .nav-btn.active, .nav-btn:hover { color: var(--accent); }
+
+    .nav-btn svg { width: 20px; height: 20px; }
+
+    /* ─── SECTIONS ─── */
+    .section {
+      display: none;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 24px 20px 100px;
+      min-height: 100svh;
+    }
+
+    .section.active { display: block; }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 28px;
+      padding-top: 20px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 48px;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 2px 8px;
+    }
+
+    /* ─── LINKS ─── */
+    .links-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 16px 18px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .link-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transition: transform 0.2s;
+    }
+
+    .link-card:hover {
+      border-color: var(--accent);
+      background: #1a1a0a;
+      transform: translateX(4px);
+    }
+
+    .link-card:hover::before { transform: scaleY(1); }
+
+    .link-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .link-info { flex: 1; }
+
+    .link-name {
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .link-desc {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .link-arrow {
+      color: var(--muted);
+      font-size: 18px;
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .link-card:hover .link-arrow {
+      transform: translateX(4px);
+      color: var(--accent);
+    }
+
+    /* ─── PODCAST ─── */
+    .podcast-banner {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .podcast-banner::after {
+      content: 'MI\AGENERACIÓN';
+      position: absolute;
+      right: -10px;
+      top: -10px;
+      font-family: var(--font-display);
+      font-size: 60px;
+      color: rgba(232,255,0,0.04);
+      line-height: 1;
+      pointer-events: none;
+      white-space: pre;
+    }
+
+    .podcast-title {
+      font-family: var(--font-display);
+      font-size: 36px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .podcast-title span { color: var(--accent); }
+
+    .podcast-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 300px;
+    }
+
+    .podcast-platforms {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .platform-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      transition: all 0.2s;
+    }
+
+    .platform-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .episodes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .episode-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 16px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .episode-card:hover {
+      border-color: var(--accent);
+    }
+
+    .ep-num {
+      font-family: var(--font-display);
+      font-size: 28px;
+      color: var(--accent);
+      line-height: 1;
+      min-width: 40px;
+      opacity: 0.6;
+    }
+
+    .ep-info { flex: 1; }
+
+    .ep-title {
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .ep-meta {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+    }
+
+    .play-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      flex-shrink: 0;
+    }
+
+    /* ─── CONTENIDO / COLUMNAS ─── */
+    .content-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .tag-pill {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.2s;
+      background: none;
+    }
+
+    .tag-pill.active, .tag-pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(232,255,0,0.05);
+    }
+
+    .article-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 20px;
+      margin-bottom: 12px;
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+      transition: all 0.2s;
+    }
+
+    .article-card:hover {
+      border-color: var(--accent);
+    }
+
+    .article-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .article-title {
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .article-excerpt {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .article-date {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--border);
+      margin-top: 12px;
+    }
+
+    /* ─── CONTACTO ─── */
+    .contact-intro {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .contact-intro p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .contact-intro strong { color: var(--text); }
+
+    .contact-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 14px 16px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .contact-item:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .contact-item-icon {
+      font-size: 20px;
+      width: 36px;
+      text-align: center;
+    }
+
+    .contact-item-info { flex: 1; }
+
+    .contact-item-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 3px;
+    }
+
+    .contact-item-value {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .manifesto-box {
+      border: 1px solid var(--accent);
+      padding: 24px;
+      margin-top: 8px;
+      position: relative;
+    }
+
+    .manifesto-box::before {
+      content: '"';
+      font-family: var(--font-display);
+      font-size: 80px;
+      color: var(--accent);
+      position: absolute;
+      top: -10px;
+      left: 16px;
+      line-height: 1;
+    }
+
+    .manifesto-text {
+      font-family: var(--font-display);
+      font-size: 22px;
+      line-height: 1.2;
+      padding-top: 24px;
+    }
+
+    .manifesto-text span { color: var(--accent); }
+
+    .manifesto-attr {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    /* ─── DOCUMENTAL CTA ─── */
+    .documental-cta {
+      background: linear-gradient(135deg, #1a1a00 0%, #0a0a0a 100%);
+      border: 1px solid rgba(232,255,0,0.3);
+      padding: 24px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .documental-cta:hover { border-color: var(--accent); }
+
+    .documental-cta-icon {
+      font-size: 36px;
+      flex-shrink: 0;
+    }
+
+    .documental-cta-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+
+    .documental-cta-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .documental-cta-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ─── FOOTER ─── */
+    .footer-credit {
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: #333;
+      letter-spacing: 0.08em;
+      padding: 16px 20px;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* ─── SPLASH ─── */
+    #splash {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      animation: splashOut 0.4s 1.8s ease forwards;
+    }
+
+    @keyframes splashOut {
+      to { opacity: 0; pointer-events: none; }
+    }
+
+    .splash-name {
+      font-family: var(--font-display);
+      font-size: 64px;
+      color: var(--text);
+      animation: fadeIn 0.5s ease;
+    }
+
+    .splash-name span { color: var(--accent); }
+
+    .splash-bar {
+      width: 200px;
+      height: 2px;
+      background: var(--border);
+      overflow: hidden;
+    }
+
+    .splash-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      animation: fillBar 1.4s ease forwards;
+    }
+
+    @keyframes fillBar {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    .splash-credit {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: #333;
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .divider-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── #NoConMiAhorro BADGE ─── */
+    .causa-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,59,59,0.1);
+      border: 1px solid var(--accent2);
+      color: var(--accent2);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 6px 14px;
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .causa-badge:hover { background: rgba(255,59,59,0.2); }
+  </style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="splash-name">SOY<span>JEROME</span></div>
+  <div class="splash-bar"><div class="splash-bar-fill"></div></div>
+  <div class="splash-credit">Desarrollada por Vibras Positivas HM</div>
+</div>
+
+<!-- ─── SECTION: HOME ─── -->
+<section id="sec-home" class="section active">
+  <div class="hero">
+    <div class="hero-bg">
+      <div class="hero-bg-grid"></div>
+      <div class="hero-bg-glow"></div>
+      <div class="hero-bg-glow2"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-tag">BOGOTÁ, COLOMBIA · 19 AÑOS</div>
+      <h1 class="hero-name">SOY<span>JEROME</span></h1>
+      <p class="hero-tagline">
+        <strong>Podcast · Activismo · Columnas</strong><br>
+        Vocera de #NoConMiAhorro. Columnista La República.<br>
+        Sin permiso para envejecer.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">229K</span>
+          <span class="stat-label">Instagram</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">147K</span>
+          <span class="stat-label">TikTok</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">66K</span>
+          <span class="stat-label">X / Twitter</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-hint-line"></div>
+      <span>SCROLL</span>
+    </div>
+  </div>
+
+  <div style="max-width:480px;margin:0 auto;padding:0 20px 20px;">
+    <a href="https://www.youtube.com/watch?v=gw6hs5wymSQ" target="_blank" class="documental-cta">
+      <div class="documental-cta-icon">🎬</div>
+      <div>
+        <div class="documental-cta-label">DOCUMENTAL COMPLETO</div>
+        <div class="documental-cta-title">SIN PERMISO PARA ENVEJECER</div>
+        <div class="documental-cta-sub">Ver en YouTube — gratis</div>
+      </div>
+    </a>
+
+    <a href="https://x.com/hashtag/NoConMiAhorro" target="_blank" class="causa-badge">
+      ⚡ #NOCONMIAHORRO — ÚNETE A LA CAUSA
+    </a>
+
+    <div class="manifesto-box">
+      <p class="manifesto-text">
+        La edad no es una barrera cuando quieres <span>transformar</span> la sociedad.
+      </p>
+      <p class="manifesto-attr">— Jerome Sanabria</p>
+    </div>
+  </div>
+
+  <div class="footer-credit">Desarrollada por Vibras Positivas HM — Derechos de Autor Reservados</div>
+</section>
+
+<!-- ─── SECTION: LINKS ─── -->
+<section id="sec-links" class="section">
+  <div class="section-header">
+    <h2 class="section-title">LINKS</h2>
+    <span class="section-num">01</span>
+  </div>
+
+  <div class="links-grid">
+    <a href="https://www.instagram.com/soyjerome_/" target="_blank" class="link-card">
+      <div class="link-icon" style="background:#1a0a1a;">📸</div>
+      <div class="link-info">
+        <div class="link-name">Instagram</div>
+        <div class="link-desc">@soyjerome_ · 229K seguidores</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://www.tiktok.com/@soyjerome_" target="_blank" class="link-card">
+      <div class="link-icon" style="background:#001a1a;">🎵</div>
+      <div class="link-info">
+        <div class="link-name">TikTok</div>
+        <div class="link-desc">@soyjerome_ · 147K seguidores</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://x.com/SoyJerome__" target="_blank" class="link-card">
+      <div class="link-icon" style="background:#0a0a0f;">𝕏</div>
+      <div class="link-info">
+        <div class="link-name">X (Twitter)</div>
+        <div class="link-desc">@SoyJerome__ · 66K seguidores</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://co.linkedin.com/in/jerome-sanabria-7094522b4" target="_blank" class="link-card">
+      <div class="link-icon" style="background:#001020;">💼</div>
+      <div class="link-info">
+        <div class="link-name">LinkedIn</div>
+        <div class="link-desc">Jerome Sanabria · Universidad del Rosario</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://www.youtube.com/@soyjerome_" target="_blank" class="link-card">
+      <div class="link-icon" style="background:#1a0000;">▶️</div>
+      <div class="link-info">
+        <div class="link-name">YouTube</div>
+        <div class="link-desc">Podcast Mi Generación + Documental</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-label">PRENSA</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <a href="https://www.larepublica.co/" target="_blank" class="link-card">
+      <div class="link-icon" style="background:#100800;">📰</div>
+      <div class="link-info">
+        <div class="link-name">La República</div>
+        <div class="link-desc">Columnista — Economía y pensiones</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://www.youtube.com/watch?v=gw6hs5wymSQ" target="_blank" class="link-card">
+      <div class="link-icon" style="background:#0a0a00;">🎬</div>
+      <div class="link-info">
+        <div class="link-name">Documental completo</div>
+        <div class="link-desc">Sin Permiso Para Envejecer — YouTube</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a href="https://x.com/hashtag/NoConMiAhorro" target="_blank" class="link-card" style="border-color:rgba(255,59,59,0.3);">
+      <div class="link-icon" style="background:#1a0000;">⚡</div>
+      <div class="link-info">
+        <div class="link-name" style="color:var(--accent2);">#NoConMiAhorro</div>
+        <div class="link-desc">Movimiento · Reforma pensional Colombia</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+  </div>
+  <div class="footer-credit" style="margin-top:24px;">Desarrollada por Vibras Positivas HM — Derechos de Autor Reservados</div>
+</section>
+
+<!-- ─── SECTION: PODCAST ─── -->
+<section id="sec-podcast" class="section">
+  <div class="section-header">
+    <h2 class="section-title">PODCAST</h2>
+    <span class="section-num">02</span>
+  </div>
+
+  <div class="podcast-banner">
+    <div class="podcast-title">MI<br><span>GENERACIÓN</span></div>
+    <p class="podcast-desc">
+      El podcast donde los jóvenes colombianos hablan de economía, pensiones, política y el futuro que nos merecemos.
+    </p>
+    <div class="podcast-platforms">
+      <a href="https://www.youtube.com/@soyjerome_" target="_blank" class="platform-btn">▶ YouTube</a>
+      <a href="https://open.spotify.com/search/Mi%20Generaci%C3%B3n%20Jerome" target="_blank" class="platform-btn">◎ Spotify</a>
+      <a href="https://podcasts.apple.com/search?term=mi%20generacion%20jerome" target="_blank" class="platform-btn">⬡ Apple</a>
+    </div>
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-label">EPISODIOS RECIENTES</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="episodes-list">
+    <a href="https://www.youtube.com/@soyjerome_" target="_blank" class="episode-card">
+      <div class="ep-num">EP</div>
+      <div class="ep-info">
+        <div class="ep-title">Empleo e informalidad: lo que los jóvenes deben saber desde ya</div>
+        <div class="ep-meta">INVITADO: EXPERTO LABORAL · MI GENERACIÓN</div>
+      </div>
+      <div class="play-btn">▶</div>
+    </a>
+    <a href="https://www.youtube.com/@soyjerome_" target="_blank" class="episode-card">
+      <div class="ep-num">EP</div>
+      <div class="ep-info">
+        <div class="ep-title">¿Cómo funcionan las AFP? ¿Son lo mismo que Colpensiones?</div>
+        <div class="ep-meta">PENSIONES · MI GENERACIÓN</div>
+      </div>
+      <div class="play-btn">▶</div>
+    </a>
+    <a href="https://www.youtube.com/@soyjerome_" target="_blank" class="episode-card">
+      <div class="ep-num">EP</div>
+      <div class="ep-info">
+        <div class="ep-title">La reforma pensional que eliminó la devolución de saldos</div>
+        <div class="ep-meta">ANÁLISIS · MI GENERACIÓN</div>
+      </div>
+      <div class="play-btn">▶</div>
+    </a>
+  </div>
+  <div style="text-align:center;margin-top:20px;">
+    <a href="https://www.youtube.com/@soyjerome_" target="_blank" class="platform-btn" style="display:inline-flex;">
+      VER TODOS LOS EPISODIOS →
+    </a>
+  </div>
+  <div class="footer-credit" style="margin-top:24px;">Desarrollada por Vibras Positivas HM — Derechos de Autor Reservados</div>
+</section>
+
+<!-- ─── SECTION: CONTENIDO ─── -->
+<section id="sec-content" class="section">
+  <div class="section-header">
+    <h2 class="section-title">CONTENIDO</h2>
+    <span class="section-num">03</span>
+  </div>
+
+  <div class="content-tags">
+    <button class="tag-pill active">TODO</button>
+    <button class="tag-pill">PENSIONES</button>
+    <button class="tag-pill">ECONOMÍA</button>
+    <button class="tag-pill">DOCUMENTAL</button>
+    <button class="tag-pill">COLUMNAS</button>
+  </div>
+
+  <a href="https://www.youtube.com/watch?v=gw6hs5wymSQ" target="_blank" class="article-card" style="border-left:3px solid var(--accent2);">
+    <span class="article-tag" style="color:var(--accent2);">DOCUMENTAL · 2025</span>
+    <div class="article-title">Sin Permiso Para Envejecer — Documental completo</div>
+    <div class="article-excerpt">
+      Jerome viajó por Latinoamérica documentando qué pasa con los jubilados cuando los políticos administran los ahorros de la gente. Argentina, Perú y Colombia bajo la lupa.
+    </div>
+    <div class="article-date">YouTube · Disponible ahora</div>
+  </a>
+
+  <a href="https://www.larepublica.co/" target="_blank" class="article-card">
+    <span class="article-tag">COLUMNA · LA REPÚBLICA</span>
+    <div class="article-title">Ultra neofascista: respuesta a la injuria de Ana Bejarano</div>
+    <div class="article-excerpt">
+      Jerome responde con datos y argumentos los ataques recibidos por sus charlas sobre libertad económica y defensa de los fondos privados.
+    </div>
+    <div class="article-date">La República · 2026</div>
+  </a>
+
+  <a href="https://pluralidadz.com/economia/jerome-sanabria-la-vocera-libertaria-que-defiende-los-fondos-privados-de-pension-en-colombia/" target="_blank" class="article-card">
+    <span class="article-tag">ENTREVISTA · PENSIONES</span>
+    <div class="article-title">La reforma pensional que convierte 113 millones en 110 mil pesos al mes</div>
+    <div class="article-excerpt">
+      El caso del padre de Jerome lo cambió todo: cómo una experiencia personal se convirtió en la investigación más importante de su vida sobre la reforma pensional.
+    </div>
+    <div class="article-date">Pluralidad Z · Oct 2025</div>
+  </a>
+
+  <a href="https://www.youtube.com/@soyjerome_" target="_blank" class="article-card">
+    <span class="article-tag">PODCAST · ECONOMÍA</span>
+    <div class="article-title">Rising Star 2025 en pensiones — Reconocimiento y lo que sigue</div>
+    <div class="article-excerpt">
+      Con 19 años, Jerome fue reconocida como Rising Star en el ecosistema de pensiones en Colombia. Qué significa y cuáles son sus próximos pasos.
+    </div>
+    <div class="article-date">Mi Generación · 2025</div>
+  </a>
+  <div class="footer-credit" style="margin-top:24px;">Desarrollada por Vibras Positivas HM — Derechos de Autor Reservados</div>
+</section>
+
+<!-- ─── SECTION: CONTACTO ─── -->
+<section id="sec-contact" class="section">
+  <div class="section-header">
+    <h2 class="section-title">CONTACTO</h2>
+    <span class="section-num">04</span>
+  </div>
+
+  <div class="contact-intro">
+    <p>
+      ¿Quieres invitar a Jerome a una <strong>charla o conferencia</strong>? ¿Proponer una <strong>colaboración</strong>? ¿Hay algo que quieres preguntarle?
+      Escríbele directamente por sus redes o al correo de su equipo.
+    </p>
+  </div>
+
+  <div class="contact-grid">
+    <a href="mailto:GraciasAnaBejarano@gmail.com" class="contact-item">
+      <div class="contact-item-icon">✉️</div>
+      <div class="contact-item-info">
+        <div class="contact-item-label">EMAIL — CHARLAS</div>
+        <div class="contact-item-value">GraciasAnaBejarano@gmail.com</div>
+      </div>
+    </a>
+    <a href="https://www.instagram.com/soyjerome_/" target="_blank" class="contact-item">
+      <div class="contact-item-icon">📸</div>
+      <div class="contact-item-info">
+        <div class="contact-item-label">INSTAGRAM</div>
+        <div class="contact-item-value">@soyjerome_</div>
+      </div>
+    </a>
+    <a href="https://x.com/SoyJerome__" target="_blank" class="contact-item">
+      <div class="contact-item-icon">𝕏</div>
+      <div class="contact-item-info">
+        <div class="contact-item-label">X / TWITTER</div>
+        <div class="contact-item-value">@SoyJerome__</div>
+      </div>
+    </a>
+    <a href="https://co.linkedin.com/in/jerome-sanabria-7094522b4" target="_blank" class="contact-item">
+      <div class="contact-item-icon">💼</div>
+      <div class="contact-item-info">
+        <div class="contact-item-label">LINKEDIN</div>
+        <div class="contact-item-value">Jerome Sanabria</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="manifesto-box">
+    <p class="manifesto-text">
+      Sin permiso para <span>envejecer</span>.<br>Con causa para <span>actuar</span>.
+    </p>
+    <p class="manifesto-attr">— Jerome Sanabria · @soyjerome_</p>
+  </div>
+
+  <div class="footer-credit" style="margin-top:24px;">Desarrollada por Vibras Positivas HM — Derechos de Autor Reservados</div>
+</section>
+
+<!-- ─── BOTTOM NAV ─── -->
+<nav class="bottom-nav">
+  <button class="nav-btn active" onclick="showSection('home',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+    INICIO
+  </button>
+  <button class="nav-btn" onclick="showSection('links',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+    LINKS
+  </button>
+  <button class="nav-btn" onclick="showSection('podcast',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16 10,8"/></svg>
+    PODCAST
+  </button>
+  <button class="nav-btn" onclick="showSection('content',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+    CONTENIDO
+  </button>
+  <button class="nav-btn" onclick="showSection('contact',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    CONTACTO
+  </button>
+</nav>
+
+<script>
+  // Tag pills
+  document.querySelectorAll('.tag-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+    });
+  });
+
+  // Section navigation
+  function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('sec-' + id).classList.add('active');
+    if (btn) btn.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  // Register service worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
+</script>
+</body>
+</html>
